@@ -1,0 +1,33 @@
+en:
+  ricer4:
+    plugins:
+      note:
+        
+        show_item: 'Note from %{from} at %{date}: %{text}'
+        list_item: '%{unread}%{id}-%{from}%{unread}'
+        
+        inbox:
+          trigger: 'notes.inbox'
+          description: 'Browse messages from other users in your inbox.'
+        
+        note:
+          trigger: 'notes'
+          msg_new_notes:
+            one: 'Someone has sent you a note. Use "$T$note unread" to read it.'
+            other: 'You have %{count} unread notes. Use "$T$note unread" to read it.'
+        
+        outbox:
+          trigger: 'notes.outbox'
+          description: 'Browse sent messages to other users in your outbox.'
+        
+        send:
+          trigger: 'note.send'
+          description: 'Send a message to a user that can be read later.'
+          err_send_self: 'You cannot send yourself messages.'
+          msg_instant: 'Your message has been delivered instantly.'
+          msg_stored: 'Your message will be delivered when the user joins and/or authenticates.'
+        
+        unread:
+          trigger: 'notes.unread'
+          description: 'Read the oldest note that is still unread.'
+          err_all_read: 'There are no unread notes for you. Try "$T$notes inbox" or "$T$notes outbox" to search in old notes.'

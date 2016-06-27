@@ -3,6 +3,8 @@ module Ricer4::Plugins::Note
     
     self.table_name = :note_messages
     
+    arm_i18n
+    
     belongs_to :sender, :class_name => 'Ricer4::User'
     belongs_to :receiver, :class_name => 'Ricer4::User'
     
@@ -52,7 +54,7 @@ module Ricer4::Plugins::Note
     end
 
     def display_list_item(number)
-      I18n.t('ricer4.plugins.note.list_item', id: number, from: self.sender.display_name, unread: unread_bold)
+      t('ricer4.plugins.note.list_item', id: number, from: self.sender.display_name, unread: unread_bold)
     end
     
     def unread_bold
@@ -61,7 +63,7 @@ module Ricer4::Plugins::Note
 
     def display_show_item(number=1)
       mark_read
-      I18n.t('ricer4.plugins.note.show_item',
+      t('ricer4.plugins.note.show_item',
         from: self.sender.display_name,
         date: self.display_date,
         text: self.message
@@ -71,10 +73,11 @@ module Ricer4::Plugins::Note
     def mark_read
       self.read_at = Time.now
       self.save!
+      self
     end
     
     def display_date
-      I18n.l(self.created_at) rescue self.created_at.to_s
+      l(self.created_at) rescue self.created_at.to_s
     end
     
   end

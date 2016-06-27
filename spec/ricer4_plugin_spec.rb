@@ -18,6 +18,7 @@ describe Ricer4::Plugins::Note do
 
   it("truncates tables") do
     USERS.destroy_all
+    expect(NOTES.count).to eq(0)
   end
 
 
@@ -42,9 +43,10 @@ describe Ricer4::Plugins::Note do
   
   it("can send notes") do
     expect(bot.exec_line_as_for('Ugah', 'Note/Send', 'Gunda i love you')).to eq('msg_stored')
-    expect(bot.exec_line_as_for('Gunda', 'Note/Inbox', '')).to eq('msg_stored')
     
-    
+    bot.exec_line_as('Gunda', 'help')
+    expect(bot.users.online.count).to eq(2)
+    expect(bot.exec_line_as_for('Gunda', 'Note/Inbox', '')).to include(",\"items\":2,")
   end
   
 end
